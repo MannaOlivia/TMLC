@@ -1,71 +1,73 @@
-import Head from "next/head";
+import Link from "next/link";
 import { useState } from "react";
 
-//MUi Components
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import Link from "next/link";
-import DarkModeIcon from '@mui/icons-material/DarkMode';
+// MUI Imports
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+// import { CssBaseline, ThemeProvider } from "@mui/material";
 
-import LightModeIcon from '@mui/icons-material/LightMode';
-import { LightMode } from "@mui/icons-material";
-import { DarkMode } from "@mui/icons-material";
-import { CssBaseline } from "@mui/material";
+import { useTheme } from "@mui/material";
+
+// Icons
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import { useDispatch, useSelector } from "react-redux";
+import { selectTheme,getActiveTheme,toggleTheme } from "@/redux/reducers/themeReducer";
 
 
-export default function MyAppBar(props) {
-  // const [currentTheme,setCurrentTheme]=useState("dark")
-  
+// import { darkTheme, theme } from "@/styles/mui/theme";
+
+export default function MyAppBar() {
+  const dispatch = useDispatch();
+  const currentTheme = useSelector(selectTheme).activeTheme;
+  const theme = useTheme();
+
+  // const [currentTheme, setCurrentTheme] = useState("dark");
+
   return (
     <>
- {/* <ThemeProvider theme={currentTheme === "dark" ? darktheme:theme}> */}
-  <CssBaseline/>
-      <div>
-        <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-           <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-            onClick={()=>props.setCurrentTheme(props.currentTheme === "dark" ? "light":"dark")}
-          >
-           
-             { props.currentTheme === "dark" ? <LightModeIcon/> :<DarkMode/>}
-           
-
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
-          </Typography>
-          <Link href = "/blog">
-          <Button  color="inherit">Blog</Button>
-
-         </Link>
-          <Button color="inherit">Login</Button>
-         
-            
-        </Toolbar>
-      </AppBar>
-    </Box>
- 
-        </div>
+      {/* <ThemeProvider theme={currentTheme === "dark" ? darkTheme : theme}> */}
+      {/* <CssBaseline /> */}
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static" color="primary">
+          <Toolbar>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" component="Box" sx={{ flexGrow: 1 }}>
+              The Movie Lovers Club
+            </Typography>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+              onClick={() => dispatch(toggleTheme())}
+            >
+              {currentTheme === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
+            </IconButton>
+            <Link href="/">
+              <Button sx={{ color: theme.palette.icon.main }}>Home</Button>
+            </Link>
+            <Link href="/blog">
+              <Button sx={{ color: theme.palette.icon.main }}>Blog</Button>
+            </Link>
+            <Button color="inherit">Login</Button>
+          </Toolbar>
+        </AppBar>
+      </Box>
       {/* </ThemeProvider> */}
     </>
   );

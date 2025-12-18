@@ -2,7 +2,7 @@ import { createTheme } from "@mui/material"
 
 
 
-const backgroundcolour = "#c6d4c2ff"
+const backgroundcolour = "#c2cebfff"
 const primaryColour = "#b95b5bff"
 const textcolour = "#898D49"
 const secondarycolour = "#8D495B"
@@ -20,15 +20,15 @@ let lightTheme =  createTheme({
 });
  
 const backgroundcolourdark = "#080808ff"
-const primaryColourdark = "#914b4bff"
-const textcolourdark = "#777a48ff"
-const secondarycolourdark = "#6c434dff"
-const highlightcolourdark = "#406855ff"
+const primaryColourdark = "#ffffffff"
+const textcolourdark = "#07331cff"
+const secondarycolourdark = "#3d112aff"
+const highlightcolourdark = "#383c01ff"
  
 
 
 
-let darktheme =  createTheme({
+let darkTheme =  createTheme({
     palette: {
         mode: "dark",
         background: {default: backgroundcolourdark},
@@ -39,4 +39,4 @@ let darktheme =  createTheme({
     }
 });
  
-export { lightTheme,darktheme };
+export { lightTheme,darkTheme };
