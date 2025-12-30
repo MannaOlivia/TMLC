@@ -7,4 +7,5 @@ const movieSchema = new Schema({
   description: { type: String },
 });
 
+
 mongoose.model("movies", movieSchema);
